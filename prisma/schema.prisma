@@ -15,7 +15,7 @@ model tipo_atividade {
 }
 
 model atividade {
-  id                Int                 @default(autoincrement()) @unique
+  id                Int                 @unique @default(autoincrement())
   nome              String              @db.VarChar(100)
   data_inicial      DateTime            @db.DateTime(0)
   data_final        DateTime            @db.DateTime(0)
@@ -53,6 +53,7 @@ model usuario_atividade {
   data_validacao DateTime? @db.DateTime(0)
   justificativa  String?   @db.VarChar(200)
   atividade_id   Int
+  pontos         Int?      @default(0)
   atividade      atividade @relation(fields: [atividade_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_atividade_atividade10")
 
   @@id([id, atividade_id])

@@ -5,15 +5,13 @@ const storage = multer.diskStorage({
       cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-     
-
       const extensaoArquivo = file.originalname.split('.')[1];
 
       const novoNomeArquivo = require('crypto')
         .randomBytes(64)
         .toString('hex');
 
-      req.arquivo = novoNomeArquivo
+      req.arquivo = `${novoNomeArquivo}.${extensaoArquivo}`
 
       cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
   }
