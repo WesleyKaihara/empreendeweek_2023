@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model tipo_atividade {
+  id        Int         @id @default(autoincrement())
+  nome      String      @db.VarChar(100)
+  interna   Int         @db.TinyInt
+  atividade atividade[]
+}
+
+model atividade {
+  id                Int                 @default(autoincrement()) @unique
+  nome              String              @db.VarChar(100)
+  data_inicial      DateTime            @db.DateTime(0)
+  data_final        DateTime            @db.DateTime(0)
+  tipo_atividade_id Int
+  tipo_atividade    tipo_atividade      @relation(fields: [tipo_atividade_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_atividade_tipo_atividade1")
+  usuario_atividade usuario_atividade[]
+
+  @@id([id, tipo_atividade_id])
+  @@index([tipo_atividade_id], map: "fk_atividade_tipo_atividade1_idx")
+}
+
+model especializacao {
+  id      Int       @id @default(autoincrement())
+  nome    String?   @db.VarChar(45)
+  usuario usuario[]
+}
+
+model usuario {
+  id                Int            @default(autoincrement())
+  nome              String         @db.VarChar(80)
+  login             String         @db.VarChar(80)
+  admin             Int            @db.TinyInt
+  especializacao_id Int
+  especializacao    especializacao @relation(fields: [especializacao_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_especializacao")
+
+  @@id([id, especializacao_id])
+  @@index([especializacao_id], map: "fk_usuario_especializacao_idx")
+}
+
+model usuario_atividade {
+  id             Int       @default(autoincrement())
+  nome_arquivo   String?   @db.VarChar(150)
+  data_upload    DateTime? @db.DateTime(0)
+  arquivo_valido Int?      @db.TinyInt
+  data_validacao DateTime? @db.DateTime(0)
+  justificativa  String?   @db.VarChar(200)
+  atividade_id   Int
+  atividade      atividade @relation(fields: [atividade_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_atividade_atividade10")
+
+  @@id([id, atividade_id])
+  @@index([atividade_id], map: "fk_usuario_atividade_atividade1_idx")
+}
