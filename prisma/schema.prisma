@@ -23,7 +23,7 @@ model atividade {
   tipo_atividade    tipo_atividade      @relation(fields: [tipo_atividade_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_atividade_tipo_atividade1")
   usuario_atividade usuario_atividade[]
 
-  @@id([id, tipo_atividade_id])
+  @@id([id])
   @@index([tipo_atividade_id], map: "fk_atividade_tipo_atividade1_idx")
 }
 
@@ -41,7 +41,7 @@ model usuario {
   especializacao_id Int
   especializacao    especializacao @relation(fields: [especializacao_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_especializacao")
 
-  @@id([id, especializacao_id])
+  @@id([id])
   @@index([especializacao_id], map: "fk_usuario_especializacao_idx")
 }
 
@@ -56,6 +56,6 @@ model usuario_atividade {
   pontos         Int?      @default(0)
   atividade      atividade @relation(fields: [atividade_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_usuario_atividade_atividade10")
 
-  @@id([id, atividade_id])
+  @@id([id])
   @@index([atividade_id], map: "fk_usuario_atividade_atividade1_idx")
 }

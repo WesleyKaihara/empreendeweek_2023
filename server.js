@@ -4,8 +4,8 @@ const app = express();
 const cors = require("cors")
 const PORT = process.env.PORT;
 
-const tiposAtividadeRotas = require("./src/routes/tipo-atividade");
-const atividadeRotas = require("./src/routes/atividade-usuario");
+const tiposAtividadeRotas = require("./src/routes/tipo_atividade");
+const atividadeRotas = require("./src/routes/atividade_usuario");
 const especializacaoRotas = require("./src/routes/especializacao");
 const atividadeUsuarioRotas = require("./src/routes/atividade");
 const usuarioRotas = require("./src/routes/usuario");
