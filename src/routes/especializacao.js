@@ -1,8 +1,10 @@
 const express = require("express");
-const { saveEspecializacao ,listarEspecializacao } = require('../controller/especializacao-controller');
+const { criarEspecializacao,listarEspecializacoes, atualizarEspecializacao, removerEspecializacao } = require('../controller/especializacao_controller');
 const router = express.Router();
 
-router.get("/especializacoes", listarEspecializacao)
-router.post("/especializacao", saveEspecializacao)
+router.get("/especializacoes", listarEspecializacoes)
+router.post("/especializacao", criarEspecializacao)
+router.put("/especializacao/:id", atualizarEspecializacao)
+router.delete("/especializacao/:id", removerEspecializacao)
 
 module.exports = router;
