@@ -23,8 +23,8 @@ app.use(function(req, res, next) {
 app.use(tiposAtividadeRotas);
 app.use(atividadeRotas);
 app.use(especializacaoRotas);
-app.use(atividadeUsuarioRotas);
 app.use(usuarioRotas);
+app.use(atividadeUsuarioRotas);
 
 app.get("/", (req,res) => {
   res.send("Hey!!")
