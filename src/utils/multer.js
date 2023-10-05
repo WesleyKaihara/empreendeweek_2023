@@ -6,11 +6,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
       const extensaoArquivo = file.originalname.split('.')[1];
-      const novoNomeArquivo = require('crypto')
-      .randomBytes(64)
-      .toString('hex');
-      
-      console.log(novoNomeArquivo);
+      const novoNomeArquivo = new Date().getTime();
       req.arquivo = `${novoNomeArquivo}.${extensaoArquivo}`
 
       cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)
