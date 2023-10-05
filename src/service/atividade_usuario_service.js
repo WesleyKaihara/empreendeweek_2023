@@ -1,7 +1,15 @@
 const DB = require("../../prisma/prisma");
 
 const find = async(id) => {
-  const atividades = await DB.usuario_atividade.findMany()
+  const atividades = await DB.usuario_atividade.findMany({
+    include: {
+      atividade: {
+        include: {
+          tipo_atividade: true
+        }
+      }
+    }
+  })
   return atividades;
 }
 
