@@ -1,7 +1,9 @@
 const { find, update, remove, create } = require('../service/atividade_service');
 
 const listarAtividades = async(req,res) => {
-  const atividades = await find();
+  const usuarioFiltro = req.query.usuario;
+
+  const atividades = await find(usuarioFiltro);
   res.json(atividades);
 }
 

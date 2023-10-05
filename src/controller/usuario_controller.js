@@ -1,4 +1,4 @@
-const { create, findOne, update, remove } = require("../service/usuario-service");
+const { create, findOne, update, remove, estatisticas } = require("../service/usuario-service");
 
 const createUsuario = async(req,res) => {
 
@@ -26,9 +26,17 @@ const removerUsuario = async(req,res) => {
   res.json({ message: `Usuario com ID: ${id} foi removido`});
 }
 
+const estatisticasUsuario = async(req,res) => {
+  const id = Number(req.params.id);
+
+  const resultado = await estatisticas(id);
+  res.json(resultado);
+}
+
 module.exports = {
   createUsuario,
   encontrarUsuario,
   atualizarUsuario,
-  removerUsuario
+  removerUsuario,
+  estatisticasUsuario
 }

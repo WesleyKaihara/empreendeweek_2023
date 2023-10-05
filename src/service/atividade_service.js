@@ -1,6 +1,6 @@
 const DB = require("../../prisma/prisma");
 
-const find = async() => {
+const find = async(usuarioFiltro) => {
   const atividades = await DB.atividade.findMany();
   return atividades;
 }
@@ -12,7 +12,7 @@ const create = async(atividadeBody) => {
       data_inicial: (new Date(atividadeBody.data_inicial)).toISOString(),
       data_final: (new Date(atividadeBody.data_final)).toISOString(),
     }
-  })
+  }) 
   return atividade;
 }
 

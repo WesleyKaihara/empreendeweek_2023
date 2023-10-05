@@ -1,4 +1,4 @@
-const { create,find, update, remove } = require("../service/atividade_usuario_service");
+const { create,find, update, remove, updateStatus } = require("../service/atividade_usuario_service");
 
 const listarAtividadesUsuario = async(req,res) => {
   const id = req.params.id;
@@ -22,6 +22,13 @@ const atualizarAtividadeUsuario = async(req,res) => {
   res.json(atividadeUsuarioAtualizada);
 }
 
+const atualizarStatus = async(req,res) => {
+  const id = Number(req.params.id);
+
+  await updateStatus(id, req.body);
+  res.json({ message: "OK"});
+}
+
 const removerAtividadeUsuario = async(req,res) => {
   const id = Number(req.params.id);
 
@@ -33,5 +40,6 @@ module.exports = {
   createAtividadeUsuario,
   listarAtividadesUsuario,
   atualizarAtividadeUsuario,
+  atualizarStatus,
   removerAtividadeUsuario
 }

@@ -16,8 +16,11 @@ const create = async(usuarioBody) => {
 
 const findOne = async(id) => {
   return await DB.usuario.findFirst({
-    where: { id }
-  })
+    where: { id },
+    include: {
+      especializacao: true
+    }
+  });
 }
 
 const update = async(id, usuarioBody) => {
@@ -37,9 +40,14 @@ const remove = async(id) => {
   })
 }
 
+const estatisticas = async(id) => {
+  return await DB.$queryRaw`SELECT SUM(ua.pontos) as pontos FROM usuario_atividade ua`
+}
+
 module.exports = {
   findOne,
   create,
   update,
-  remove
+  remove,
+  estatisticas
 }

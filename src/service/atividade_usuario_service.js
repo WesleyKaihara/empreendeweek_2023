@@ -37,11 +37,24 @@ const update = async(id, arquivo, atividadeUsuario) => {
       nome_arquivo: arquivo,
       data_upload: new Date(),
       pontos: Number(atividadeUsuario.pontos),
+      data_validacao: new Date(),
+      arquivo_valido: atividadeUsuario.arquivo_valido,
       atividade: {
         connect: {
           id: Number(atividadeUsuario.atividade_id)
         }
       }
+    }
+  });
+}
+
+const updateStatus = async(id, { pontos, arquivo_valido }) => {
+  return await DB.usuario_atividade.update({
+    where: { id },
+    data: {
+      arquivo_valido,
+      data_validacao: new Date(),
+      pontos
     }
   });
 }
@@ -56,5 +69,6 @@ module.exports = {
   create,
   find,
   update,
-  remove
+  remove,
+  updateStatus
 }
